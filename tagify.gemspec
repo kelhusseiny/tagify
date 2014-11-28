@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["just.azzurri@gmail.com"]
   spec.summary       = %q{Switch multiple selection fields into tags with autocomplete.}
   spec.description   = %q{Switch multiple selection fields into tags with autocomplete.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/Azzurrio/tagify"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
