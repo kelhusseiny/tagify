@@ -11,7 +11,7 @@ $ ->
 
   getCurrentValues = (target) ->
     inputField = getInputField(target)
-    if !!inputField.val() then JSON.parse(inputField.val()) else []
+    currentValues = if !!inputField.val() then JSON.parse(inputField.val()) else []
 
   getInputField = (target) ->
     getWrapperField(target).next()
@@ -22,6 +22,12 @@ $ ->
   enterNewValue = (selectedValue, target) ->
     inputField = getInputField(target)
     currentValues = getCurrentValues(target)
+
+    if !!target.data('max') && currentValues.length >= target.data('max')
+      shiftedValue = currentValues.shift()
+      wrapper = getWrapperField(target)
+      wrapper.find('.token').first().remove()
+
     currentValues.push(selectedValue)
     inputField.val(JSON.stringify(currentValues))
 
@@ -73,8 +79,8 @@ $ ->
         selectedValue = e.attrs.value
         removeExistingValue(selectedValue, $this)
       .on 'tokenfield:createtoken', (e) ->
-      if e.attrs.value is e.attrs.label
-        false
+        if e.attrs.value is e.attrs.label
+          false
 
       tokens = retrieveExistingTokens(data, $this)
       $this.tokenfield('setTokens', tokens);
