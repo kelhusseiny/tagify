@@ -57,8 +57,7 @@ $ ->
       return
     tokens
 
-  $('.tagify').each ->
-
+  initTagify = ->
     $this = $(this)
     filename = $this.data('file')
 
@@ -84,3 +83,9 @@ $ ->
 
       tokens = retrieveExistingTokens(data, $this)
       $this.tokenfield('setTokens', tokens);
+
+  $('.tagify').each ->
+    initTagify.apply this
+
+  $(document).on 'mouseenter focus', '.tagify', ->
+    initTagify.apply this
