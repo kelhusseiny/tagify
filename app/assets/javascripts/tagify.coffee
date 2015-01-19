@@ -35,7 +35,7 @@ $ ->
     inputField = getInputField(target)
     currentValues = getCurrentValues(target)
     currentValues = $.grep currentValues, (value) ->
-      value != parseInt(selectedValue)
+      value.toString() != selectedValue.toString()
     inputField.val(JSON.stringify(currentValues))
 
   searchJSON = (data, regex, target) ->
@@ -77,9 +77,6 @@ $ ->
       .on 'tokenfield:removedtoken', (e) ->
         selectedValue = e.attrs.value
         removeExistingValue(selectedValue, $this)
-      .on 'tokenfield:createtoken', (e) ->
-        if e.attrs.value is e.attrs.label
-          false
 
       tokens = retrieveExistingTokens(data, $this)
       $this.tokenfield('setTokens', tokens);
